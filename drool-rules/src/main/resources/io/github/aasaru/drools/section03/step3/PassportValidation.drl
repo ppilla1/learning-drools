@@ -6,23 +6,23 @@ import java.time.LocalDate;
 rule "Valid passport"
   dialect "java"
   when
-	$passport: Passport( !isExpired(), $unusedPages: unusedVisaPages > 0 )
+	$passport: Passport( !isExpired(), $unusedPages: unusedVisaPages > 0, $name: name, $age: age )
   then
-	System.out.println( $passport + " is CORRECT. It has " + $unusedPages + " pages free." );
+	System.out.println( $passport + " is CORRECT. It has " + $unusedPages + " pages free. Name is " + $name + ", Age " + $age);
 end
 
 rule "Expired passport"
   dialect "java"
   when
-	$passport: Passport( isExpired() )
+	$passport: Passport( isExpired(), $name: name, $age: age )
   then
-	System.out.println( $passport + " is INVALID because it is expired" );
+	System.out.println( $passport + " is INVALID because it is expired. Name is " + $name + ", Age " + $age );
 end
 
 rule "Full passport"
   dialect "java"
   when
-	$passport: Passport( unusedVisaPages == 0 )
+	$passport: Passport( unusedVisaPages == 0, $name: name, $age: age)
   then
-	System.out.println( $passport + " is INVALID because it has no space for visa" );
+	System.out.println( $passport + " is INVALID because it has no space for visa. Name is " + $name + ", Age " + $age);
 end
