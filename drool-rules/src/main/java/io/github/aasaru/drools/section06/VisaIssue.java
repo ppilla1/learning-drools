@@ -15,6 +15,7 @@ import io.github.aasaru.drools.domain.Passport;
 import io.github.aasaru.drools.domain.Visa;
 import io.github.aasaru.drools.domain.VisaApplication;
 import io.github.aasaru.drools.repository.ApplicationRepository;
+import lombok.extern.log4j.Log4j2;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.Agenda;
@@ -23,13 +24,14 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+@Log4j2
 public class VisaIssue {
   public static void main(final String[] args) {
     execute(Common.promptForStep(6, args, 1, 6));
   }
 
   static void execute(int step) {
-    System.out.println("Running step " + step);
+    log.info("Running step " + step);
     KieSession ksession = KieServices.Factory.get().getKieClasspathContainer().newKieSession("VisaIssueStep" + step);
 
     ksession.addEventListener(new AgendaGroupEventListener(System.out));
@@ -38,7 +40,7 @@ public class VisaIssue {
 
     if (step == 5) {
       if (Common.promptForYesNoQuestion("Do you want to set all passports as expired?")) {
-        System.out.println("Setting all passports as expired before Drools session starts");
+        log.info("Setting all passports as expired before Drools session starts");
         passports.forEach(passport -> passport.setExpiresOn(LocalDate.MIN));
       }
     }
@@ -74,15 +76,15 @@ public class VisaIssue {
       agenda.getAgendaGroup("validate-passport").setFocus();
     }
 
-    System.out.println("==== DROOLS SESSION START ==== ");
+    log.info("==== DROOLS SESSION START ==== ");
     ksession.fireAllRules();
     if (Common.disposeSession) {
       ksession.dispose();
     }
-    System.out.println("==== DROOLS SESSION END ==== ");
+    log.info("==== DROOLS SESSION END ==== ");
 
     Collection<?> visaObjects = ksession.getObjects(o -> o.getClass() == Visa.class);
-    System.out.println("== Visas from session == ");
+    log.info("== Visas from session == ");
     visaObjects.forEach(System.out::println);
 
   }

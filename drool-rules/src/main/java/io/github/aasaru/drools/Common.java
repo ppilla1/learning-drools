@@ -10,10 +10,13 @@
 
 package io.github.aasaru.drools;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Log4j2
 public class Common {
 
   public static boolean disposeSession = true;
@@ -36,17 +39,17 @@ public class Common {
         int step = Integer.parseInt(stepStr);
 
         if (step < minStep || step > maxStep) {
-          System.out.println("Step number out of range. Insert a number between " + minStep + " and " + maxStep);
+          log.info("Step number out of range. Insert a number between " + minStep + " and " + maxStep);
         }
         else {
           return step;
         }
       }
       catch (NumberFormatException e) {
-        System.out.println("Invalid number: " + stepStr);
+        log.info("Invalid number: " + stepStr);
       }
       catch (IOException e) {
-        System.out.println("Invalid step input: " + stepStr);
+        log.info("Invalid step input: " + stepStr);
       }
     }
 
@@ -70,10 +73,10 @@ public class Common {
           return false;
         }
 
-        System.out.println("Enter either 'yes' or 'no'");
+        log.info("Enter either 'yes' or 'no'");
       }
       catch (IOException e) {
-        System.out.println("Invalid input: " + enteredStr);
+        log.info("Invalid input: " + enteredStr);
       }
     }
 

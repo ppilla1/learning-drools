@@ -13,32 +13,35 @@ package io.github.aasaru.drools.section03;
 import io.github.aasaru.drools.Common;
 import io.github.aasaru.drools.domain.Passport;
 import io.github.aasaru.drools.repository.ApplicationRepository;
+import lombok.extern.log4j.Log4j2;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.StatelessKieSession;
 
 import java.util.List;
 
+
+@Log4j2
 public class StatelessPassportValidation {
   public static void main(final String[] args) {
     execute(Common.promptForStep(3, args, 1, 6));
   }
 
   static void execute(int step) {
-    System.out.println("Running step " + step);
+    log.info("Running step {}", step);
 
     List<Passport> passports = ApplicationRepository.getPassports();
 
     KieContainer kieContainer = KieServices.Factory.get().getKieClasspathContainer();
     StatelessKieSession kieSession = kieContainer.newStatelessKieSession("StatelessPassportValidationStep" + step);
-    System.out.println("==== DROOLS SESSION START ==== ");
+    log.info("==== DROOLS SESSION START ==== ");
     kieSession.execute(passports);
-    System.out.println("==== DROOLS SESSION END ==== ");
+    log.info("==== DROOLS SESSION END ==== ");
 
     if (step >= 4) {
-      System.out.println("==== PASSPORTS AFTER DROOLS SESSION ==== ");
+      log.info("==== PASSPORTS AFTER DROOLS SESSION ==== ");
 
-      passports.forEach(passport -> System.out.println(passport + " validation " + passport.getValidation()));
+      passports.forEach(passport -> log.info(passport + " validation " + passport.getValidation()));
 
     }
 

@@ -14,12 +14,14 @@ import io.github.aasaru.drools.Common;
 import io.github.aasaru.drools.domain.Passport;
 import io.github.aasaru.drools.domain.VisaApplication;
 import io.github.aasaru.drools.repository.ApplicationRepository;
+import lombok.extern.log4j.Log4j2;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 import java.util.List;
 
+@Log4j2
 public class VisaApplicationValidation {
   public static void main(final String[] args) {
     execute(Common.promptForStep(5, args, 1, 3));
@@ -27,7 +29,7 @@ public class VisaApplicationValidation {
 
 
   static void execute(int step) {
-    System.out.println("Running step " + step);
+    log.info("Running step " + step);
     KieContainer kieClasspathContainer = KieServices.Factory.get().getKieClasspathContainer();
     KieSession ksession = kieClasspathContainer.newKieSession("VisaApplicationStep" + step);
 
@@ -37,19 +39,19 @@ public class VisaApplicationValidation {
     List<VisaApplication> visaApplications = ApplicationRepository.getVisaApplications();
     visaApplications.forEach(ksession::insert);
 
-    System.out.println("==== DROOLS SESSION START ==== ");
+    log.info("==== DROOLS SESSION START ==== ");
     ksession.fireAllRules();
     if (Common.disposeSession) {
       ksession.dispose();
     }
-    System.out.println("==== DROOLS SESSION END ==== ");
+    log.info("==== DROOLS SESSION END ==== ");
 
-    System.out.println("==== PASSPORTS AFTER DROOLS SESSION === ");
-    passports.forEach(passport -> System.out.println(passport + " verdict: " + passport.getValidation()));
+    log.info("==== PASSPORTS AFTER DROOLS SESSION === ");
+    passports.forEach(passport -> log.info(passport + " verdict: " + passport.getValidation()));
 
-    System.out.println("==== APPLICATIONS STATE AFTER DROOLS SESSION === ");
+    log.info("==== APPLICATIONS STATE AFTER DROOLS SESSION === ");
     visaApplications.forEach(visaApplication ->
-        System.out.println(visaApplication + " verdict: " + visaApplication.getValidation())
+        log.info(visaApplication + " verdict: " + visaApplication.getValidation())
     );
 
 

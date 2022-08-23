@@ -1,9 +1,11 @@
 package io.github.aasaru.drools.section06;
 
+import lombok.extern.log4j.Log4j2;
 import org.kie.api.event.rule.*;
 
 import java.io.PrintStream;
 
+@Log4j2
 public class AgendaGroupEventListener extends DebugAgendaEventListener {
 
   private PrintStream stream;
