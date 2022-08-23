@@ -3,9 +3,11 @@ buildscript {
         lombok_version = '1.18.24'
         log4j2_version = '2.18.0'
         junit5_version = '5.9.0'
-        kafkaStreams_version = '3.2.1'
+        drools_version = '7.73.0.Final'
         resilience4j_version = '1.7.1'
         vavr_version = '1.0.0-alpha-4'
+        mvel_version = '2.4.5.Final'
+        hamcrest_version = '1.3'
     }
 }
 
@@ -33,8 +35,8 @@ subprojects {
         implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j2_version}"
         implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j2_version}"
 
-        compileOnly group: 'org.projectlombok', name: 'lombok', version: "${lombok_version}"
-        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombok_version}"
+//        compileOnly group: 'org.projectlombok', name: 'lombok', version: "${lombok_version}"
+//        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombok_version}"
 
         testCompileOnly group: 'org.projectlombok', name: 'lombok', version: "${lombok_version}"
         testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombok_version}"
