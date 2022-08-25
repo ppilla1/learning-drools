@@ -1,5 +1,39 @@
+buildscript {
+    ext {
+        springBoot_version = '2.7.3'
+        springDependencyMgr_version = '1.0.13.RELEASE'
+    }
+
+    apply plugin: 'application'
+    mainClassName = 'io.learning.webscrapper.Main'
+
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBoot_version}"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version "${springBoot_version}"
+    id 'io.spring.dependency-management' version "${springDependencyMgr_version}"
+}
+
 version= '1.0.SNAPSHOT'
 
+springBoot {
+    buildInfo()
+}
+
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation "org.springframework.boot:spring-boot-starter-log4j2"
+    modules {
+        module("org.springframework.boot:spring-boot-starter-logging") {
+            replacedBy("org.springframework.boot:spring-boot-starter-log4j2", "Use Log4j2 instead of Logback")
+        }
+    }
+
     implementation group: 'org.jsoup', name: 'jsoup', version: "${jsoup_version}"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
