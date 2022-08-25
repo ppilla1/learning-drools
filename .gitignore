@@ -1,6 +1,8 @@
 # Idea folders and files
 .idea
 
+# Local DB folders and files
+data
 
 # Gradle folder and files
 .gradle
