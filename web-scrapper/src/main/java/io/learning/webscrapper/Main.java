@@ -1,6 +1,10 @@
 package io.learning.webscrapper;
 
+import io.learning.webscrapper.domain.Author;
+import io.learning.webscrapper.domain.Book;
 import io.learning.webscrapper.domain.Employee;
+import io.learning.webscrapper.repository.AuthorRepository;
+import io.learning.webscrapper.repository.BookRepository;
 import io.learning.webscrapper.repository.EmployeeRepository;
 import io.vavr.control.Try;
 import lombok.Builder;
@@ -10,6 +14,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.Arrays;
 
 @Log4j2
 @SpringBootApplication
@@ -29,10 +35,25 @@ public class Main {
     }
 
     @Bean
-    public CommandLineRunner run(EmployeeRepository employeeRepository) {
+    public CommandLineRunner run(
+            EmployeeRepository employeeRepository,
+            BookRepository bookRepository,
+            AuthorRepository authorRepository) {
         return args -> {
             initializeEmployees(employeeRepository);
+            initializeBooksAndAuthors(bookRepository, authorRepository);
         };
+    }
+
+    private void initializeBooksAndAuthors(BookRepository bookRepository, AuthorRepository authorRepository) {
+        Author josh = authorRepository.save(new Author(2l, "Josh Long"));
+        Author mark = authorRepository.save(new Author(1l, "Mark Heckler"));
+
+        bookRepository.saveAll(Arrays.asList(
+                new Book("Reactive Spring", "Josh Long", josh ),
+                new Book("Cloud Native Java", "O'Reilly", josh),
+                new Book("Spring Boot Up & Running", "O'Reilly", mark)
+        ));
     }
 
     private void initializeEmployees(EmployeeRepository repository) {
