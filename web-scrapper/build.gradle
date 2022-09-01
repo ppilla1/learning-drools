@@ -3,6 +3,8 @@ buildscript {
         springBoot_version = '2.7.3'
         springDependencyMgr_version = '1.0.13.RELEASE'
         springdoc_version = '1.6.11'
+        rocksdb_version = '7.4.5'
+        avro_version = '1.11.1'
     }
 
     dependencies {
@@ -32,9 +34,14 @@ dependencies {
         }
     }
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-graphql'
     runtimeOnly 'com.h2database:h2'
-    implementation group: 'org.jsoup', name: 'jsoup', version: "${jsoup_version}"
+
+    implementation group: 'org.apache.avro', name: 'avro', version: "${avro_version}"
+    implementation group: 'org.rocksdb', name: 'rocksdbjni', version: "${rocksdb_version}"
+
+    //implementation group: 'org.jsoup', name: 'jsoup', version: "${jsoup_version}"
+
+    implementation 'org.springframework.boot:spring-boot-starter-graphql'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

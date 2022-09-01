@@ -1,0 +1,47 @@
+{
+  "type": "record",
+  "name": "AvroHttpRequest",
+  "namespace": "io.learning.webscraper.domain",
+  "fields": [
+    {
+      "name": "requestTime",
+      "type": "long"
+    },
+    {
+      "name": "clientIdentifier",
+      "type": {
+        "type": "record",
+        "name": "ClientIdentifier",
+        "fields": [
+          {
+            "name": "hostname",
+            "type": "string"
+          },
+          {
+            "name": "ipAddress",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "employeeNames",
+      "type": {
+        "type": "array",
+        "items": "string"
+      },
+      "default": []
+    },
+    {
+      "name": "active",
+      "type": {
+        "type": "enum",
+        "name": "Active",
+        "symbols": [
+          "YES",
+          "NO"
+        ]
+      }
+    }
+  ]
+}

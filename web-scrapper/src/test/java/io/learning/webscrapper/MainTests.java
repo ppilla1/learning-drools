@@ -12,7 +12,8 @@ class MainTests {
 
     @Test
     void contextLoads() {
-        log.info("Hello, World SpringTest");
+        final String userHome = System.getProperty("user.home");
+        log.info("Hello {}, World SpringTest", userHome);
         assertTrue(true);
     }
 
