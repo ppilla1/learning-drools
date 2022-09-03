@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.SerializationUtils;
 
@@ -17,8 +18,7 @@ import java.util.Optional;
 public class RocksDBRepository implements KVRepository<String, Object>{
     private RocksDB rocksDB;
 
-
-    public RocksDBRepository(String dbname) {
+    public RocksDBRepository(@Value("${rocksdb.name.testdb}") String dbname) {
         RocksDB.loadLibrary();
         File baseDir = new File(System.getProperty("java.io.tmpdir"), dbname);
 
