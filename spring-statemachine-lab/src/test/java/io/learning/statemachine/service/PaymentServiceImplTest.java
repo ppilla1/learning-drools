@@ -5,6 +5,7 @@ import io.learning.statemachine.domain.PaymentEvents;
 import io.learning.statemachine.domain.PaymentStates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,7 @@ class PaymentServiceImplTest {
 
     @Transactional
     @Test
+    @RepeatedTest(10)
     void test_Create_PreAuth_PreAuthAprv() {
 
         Payment payment = Payment.builder()
