@@ -1,4 +1,5 @@
 rootProject.name = 'io.learning'
 include 'drool-rules'
 include 'web-scrapper'
+include 'spring-statemachine-lab'
 
