@@ -1,5 +1,5 @@
 rootProject.name = 'io.learning'
 include 'drool-rules'
-include 'web-scrapper'
+include 'rocksdb-with-avro'
 include 'spring-statemachine-lab'
 
