@@ -100,7 +100,7 @@ public class TestAvro {
         assertTrue(!requestDeserializeGeneric.isEmpty());
     }
 
-    @Test
+    //@Test
     public void test_save_find_delete_AvroHttpRequest_in_RocksDB() throws IOException {
         AvroHttpRequestManagerService service = new AvroHttpRequestManagerService(new AvroRocksDBRepository("avro-store"));
         long id = System.nanoTime();
@@ -130,7 +130,7 @@ public class TestAvro {
         log.info("Avro object deleted for id {}\n{}", id, request);
     }
 
-    @Test
+    //@Test
     public void test_findAvroHttpRequest_in_RocksDB() throws IOException {
         AvroHttpRequestManagerService service = new AvroHttpRequestManagerService(new AvroRocksDBRepository("avro-store"));
 
