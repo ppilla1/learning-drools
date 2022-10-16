@@ -1,3 +1,16 @@
+# Idea folders and files
+.idea
+*.iml
+**/*.iml
+
+# Local DB folders and files
+data
+
+# Gradle folder and files
+.gradle
+build
+**/build
+
 # Compiled class file
 *.class
 

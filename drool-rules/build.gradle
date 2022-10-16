@@ -1,0 +1,15 @@
+version= '1.0.SNAPSHOT'
+
+dependencies {
+
+    compileOnly group: 'org.mvel', name: 'mvel2', version: "${mvel_version}"
+
+    implementation group: 'org.drools', name: 'drools-mvel', version: "${drools_version}"
+    implementation group: 'org.kie', name: 'kie-api', version: "${drools_version}"
+    implementation group: 'org.kie', name: 'kie-internal', version: "${drools_version}"
+    implementation group: 'org.drools', name: 'drools-core', version: "${drools_version}"
+    implementation group: 'org.drools', name: 'drools-compiler', version: "${drools_version}"
+
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-all', version: "${hamcrest_version}"
+
+}
