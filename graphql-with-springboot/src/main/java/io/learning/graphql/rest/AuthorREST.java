@@ -1,6 +1,5 @@
-package io.learning.graphql.api;
+package io.learning.graphql.rest;
 
-import io.learning.graphql.domain.Author;
 import io.learning.graphql.repository.AuthorRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import java.util.stream.StreamSupport;
 
 @Log4j2
 @RestController
-@RequestMapping(path = "/authors_v1")
+@RequestMapping(path = "/authors")
 public class AuthorREST {
 
     private final AuthorRepository authorRepository;
@@ -25,7 +24,7 @@ public class AuthorREST {
         this.authorRepository = authorRepository;
     }
 
-    @GetMapping(path = {"/authors"})
+    @GetMapping
     ResponseEntity<Set<Map<String, Object>>> allAuthors() {
 
         /* Below implementation was done to prevent circular reference while json deserialize */

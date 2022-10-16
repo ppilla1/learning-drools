@@ -1,6 +1,5 @@
-package io.learning.graphql.api;
+package io.learning.graphql.rest;
 
-import io.learning.graphql.domain.Book;
 import io.learning.graphql.repository.BookRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,14 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
-@RequestMapping(path = "/books_v1")
+@RequestMapping(path = "/books")
 public class BooksREST {
 
     private final BookRepository bookRepository;
@@ -24,7 +22,7 @@ public class BooksREST {
         this.bookRepository = bookRepository;
     }
 
-    @GetMapping(path = {"/books"})
+    @GetMapping
     ResponseEntity<Set<Map<String, Object>>> allBooks() {
 
         /* Below implementation was done to prevent circular reference while json deserialize */
