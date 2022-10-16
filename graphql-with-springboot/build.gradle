@@ -1,0 +1,33 @@
+buildscript {
+    ext {
+        springBoot_version = '2.7.3'
+        springDependencyMgr_version = '1.0.13.RELEASE'
+        springdoc_version = '1.6.11'
+    }
+
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBoot_version}"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version "${springBoot_version}"
+    id 'io.spring.dependency-management' version "${springDependencyMgr_version}"
+}
+
+version= '0.1.SNAPSHOT'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: "${springdoc_version}"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation "org.springframework.boot:spring-boot-starter-log4j2"
+    modules {
+        module("org.springframework.boot:spring-boot-starter-logging") {
+            replacedBy("org.springframework.boot:spring-boot-starter-log4j2", "Use Log4j2 instead of Logback")
+        }
+    }
+
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

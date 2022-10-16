@@ -1,5 +1,7 @@
 # Idea folders and files
 .idea
+*.iml
+**/*.iml
 
 # Local DB folders and files
 data

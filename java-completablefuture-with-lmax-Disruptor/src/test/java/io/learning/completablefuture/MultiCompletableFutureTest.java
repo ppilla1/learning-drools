@@ -56,7 +56,7 @@ public class MultiCompletableFutureTest {
         return futures;
     }
 
-    @Test
+    //@Test
     public void test_sync_postFetch() {
         for (int i = 0; i < 10; i++) {
             List<CompletableFuture<String>> futures = generateTestData();
@@ -69,7 +69,7 @@ public class MultiCompletableFutureTest {
         }
     }
 
-    @Test
+    //@Test
     public void test_Async_postFetch() {
         for (int i = 0; i < 10; i++) {
             List<CompletableFuture<String>> futures = generateTestData();
