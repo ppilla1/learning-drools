@@ -1,4 +1,4 @@
-package io.learning.graphql.rest;
+package io.learning.graphql.api;
 
 import io.learning.graphql.repository.BookRepository;
 import org.springframework.http.ResponseEntity;
