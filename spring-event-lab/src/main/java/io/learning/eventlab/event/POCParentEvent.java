@@ -1,31 +1,16 @@
 package io.learning.eventlab.event;
 
-import org.springframework.context.ApplicationEvent;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Getter
+public class POCParentEvent<T>{
+    private final UUID correlationId;
+    private final Class<T> type;
 
-public class POCParentEvent<T>  extends ApplicationEvent {
-    private UUID correlationId;
-    private Class<T> type;
-
-    public POCParentEvent(Object source) {
-        super(source);
-    }
-
-    public UUID getCorrelationId() {
-        return correlationId;
-    }
-
-    public void setCorrelationId(UUID correlationId) {
+    public POCParentEvent(UUID correlationId, Class<T> type) {
         this.correlationId = correlationId;
-    }
-
-    public Class<T> getType() {
-        return type;
-    }
-
-    public void setType(Class<T> type) {
         this.type = type;
     }
 }
